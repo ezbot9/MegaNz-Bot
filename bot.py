@@ -46,23 +46,23 @@ async def start(_, message):
    user = message.from_user.mention
    return await message.reply_text(f"""Hey {user}, I am **Mega-Nz Bot** ✨
 
-I can download mega.nz links & upload to Telegram 💥
-Give me a mega.nz link to start download 🚿""",
-   reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Source Code 💻", url="https://github.com/ImJanindu/MegaNz-Bot")]]))
+Aku bisa mengunduh dan mengupload file dari mega.nz
+Beri aku mega.nz link untuk memulai""",
+   reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("Source Code 💻", url="https://github.com/ezbot9/MegaNz-Bot")]]))
 
 # mega download
 @bot.on_message(filters.regex(pattern="https://mega.nz/") & filters.private)
 async def meganz(_, message):
     input = message.text
     user = message.from_user.mention
-    msg = await message.reply_text("📥 `Downloading...`")
+    msg = await message.reply_text("📥 `Mengunduh`")
     try:
         file = m.download_url(input, LOCATION)
     except Exception as e:
         print(str(e))
-        return await msg.edit("❌ `Invalid Link.`")
-    await msg.edit("📤 `Uploading...`")
-    cap = f"✨ `Uploaded By:` {user} \n💻 `Bot By:` @Infinity_Bots"
+        return await msg.edit("❌ `Oops, link tidak valid`")
+    await msg.edit("📤 `Meng upload`")
+    cap = f"✨ `Uploaded By:` {user} \n💻 `Bot By:` @lhaituyangdicari"
     await bot.send_document(message.chat.id, file, caption=cap)
     await msg.delete()
     os.remove(file)
